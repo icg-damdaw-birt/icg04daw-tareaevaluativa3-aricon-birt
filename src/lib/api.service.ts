@@ -1,4 +1,5 @@
-﻿import { authToken } from './auth.store.svelte';
+﻿import { PUBLIC_API_URL } from '$env/static/public';
+import { authToken } from './auth.store.svelte';
 import type {
   ApiErrorPayload,
   Credentials,
@@ -43,10 +44,7 @@ function sanitizeBaseUrl(url: string): string {
   return trimmed.endsWith('/') ? trimmed.slice(0, -1) : trimmed;
 }
 
-// ✅ Configuración para SvelteKit: usa PUBLIC_ prefix
-const API_BASE_URL = sanitizeBaseUrl(
-  import.meta.env.VITE_PUBLIC_API_URL ?? FALLBACK_API_URL
-);
+const API_BASE_URL = sanitizeBaseUrl(PUBLIC_API_URL ?? FALLBACK_API_URL);
 
 // Función central: wrapper genérico para todas las peticiones HTTP
 // Añade headers, autenticación y manejo de errores homogéneo
